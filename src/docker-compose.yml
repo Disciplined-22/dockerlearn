@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  # This service defines the 'web' container
+  web:
+    # Build the Docker image from the Dockerfile in the current directory
+    build: .
+    # Map port 8080 on the host to port 8080 on the container
+    ports:
+      - "8080:8080"
+
+  # This service defines the 'db' container
+  db:
+    # Use the official MySQL image from Docker Hub
+    image: "mysql"
+    # Set environment variables for the MySQL container
+    environment:
+      MYSQL_ROOT_PASSWORD: "password"
+    # Mount the 'db-data' volume to persist database data
+    volumes:
+      - db-data:/var/lib/mysql
+
+# Declare the named volume 'db-data' used for persisting data for the 'db' container
+volumes:
+  db-data:
